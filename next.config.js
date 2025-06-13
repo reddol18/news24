@@ -16,6 +16,7 @@ const nextConfig = {
         ],
     },
     reactStrictMode: false,
+    assetPrefix: process.env.NODE_ENV === "production" ? "https://news24.reddol18.pe.kr" : "",
     // ... 기타 설정 (예: env, webpack 등)
 };
 

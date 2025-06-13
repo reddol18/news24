@@ -8,6 +8,8 @@ function escapeWithoutAmpercent(str: string): string {
         .replaceAll('middot;', '&middot;')
         .replaceAll('lsquo;', '&lsquo;')
         .replaceAll('rsquo;', '&rsquo;')
+        .replaceAll('ldquo;', '&ldquo;')
+        .replaceAll('rdquo;', '&rdquo;')
         .replaceAll('nbsp;', '&nbsp;')
         .replaceAll('기사를 읽어드립니다Your browser does not support theaudioelement.0', '');
 }

@@ -4,6 +4,7 @@ import { Post } from "@/models/post";
 import { PostPreview } from "./post-preview";
 import { useEffect, useState, useRef, useCallback } from 'react';
 import {getAllPosts} from "@/lib/api";
+import Footer from "@/app/_components/footer";
 type Props = {
   initialPosts: Post[];
   initialTotalCount: number;
@@ -81,10 +82,8 @@ export function MoreStories({ initialPosts, initialTotalCount }: Props) {
 
     return (
     <section>
-      <h2 className="mb-8 text-1xl md:text-1xl font-bold tracking-tighter leading-tight">
-        최신 기사
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-1 md:gap-x-16 lg:gap-x-32 gap-y-5 md:gap-y-8 mb-4">
+        <Footer />
+      <div className="grid grid-cols-1 md:grid-cols-1 md:gap-x-16 lg:gap-x-32 gap-y-4 md:gap-y-4 mb-4">
         {posts && posts.map((post) => (
           <PostPreview
             key={post.url}
@@ -97,10 +96,10 @@ export function MoreStories({ initialPosts, initialTotalCount }: Props) {
             category={post.category}
           />
         ))}
-          <div ref={loader} style={{ textAlign: 'center', padding: '20px' }}>
+          <div ref={loader} style={{textAlign: 'center', padding: '20px'}}>
               {loading && <p>로딩 중...</p>}
               {!hasMore && !loading && posts.length > 0 && (
-                  <p style={{ color: '#888' }}>모든 게시물을 불러왔습니다.</p>
+                  <p style={{color: '#888'}}>모든 게시물을 불러왔습니다.</p>
               )}
               {hasMore && !loading && ( // 더 많은 게시물이 있을 때만 표시
                   <p>스크롤하여 더 많은 게시물 로드</p>

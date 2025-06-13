@@ -6,10 +6,17 @@ import cn from "classnames";
 
 import "./globals.css";
 
+// pages/_document.tsx (TypeScript) 또는 pages/_document.js (JavaScript)
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+
+// Google Analytics 측정 ID 가져오기 (이 파일은 서버 사이드에서만 실행되므로 NEXT_PUBLIC_ 접두사가 필요 없음)
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID; // 그래도 NEXT_PUBLIC_으로 통일하는게 일반적
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: `리즈너블 뉴스 리스트`,
+  title: `뉴스 리스트`,
   description: `합리적인 정론지 및 인터넷 언론사의 최신 기사를 모아서 제공합니다.`,
   openGraph: {
     images: [HOME_OG_IMAGE_URL],
@@ -55,12 +62,31 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        {GA_MEASUREMENT_ID && (
+            <>
+              <script
+                  async
+                  src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              />
+              <script
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${GA_MEASUREMENT_ID}', {
+                      page_path: window.location.pathname,
+                    });
+                  `,
+                  }}
+              />
+            </>
+        )}
       </head>
       <body
         className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
       >
         <div className="min-h-screen">{children}</div>
-        <Footer />
       </body>
     </html>
   );

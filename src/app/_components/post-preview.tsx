@@ -24,27 +24,34 @@ export function PostPreview({
   source,
   url,
     content,
-    category
+    category,
 
 }: Props) {
   return (
-      <div className="grid grid-cols-4 gap-8 mb-8">
-          <div className="col-span-1 h-full">
-              <div className="mb-5">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 mb-1 border-b border-b-gray-100">
+          <div className="lg:col-span-1 lg:h-full">
+              <div className="flex justify-between">
+              <div className="lg:hidden text-xs mb-2 xl:mb-1 text-gray-400">
+                  <DateFormatter dateString={postdate.toISOString()} />
+              </div>
+              <Source name={source} category={category} on_mobile={true}/>
+              </div>
+              <div className="mb-2">
                   <CoverImage slug={url} title={title} src={thumbnail} />
               </div>
           </div>
-          <div className="col-span-3">
-              <h3 className="text-3xl mb-3 leading-snug">
+          <div className="lg:col-span-3">
+              <h3 className="text-sm font-bold lg:text-2xl mb-2 leading-snug truncate">
                   <Link href={url} target="_blank" className="hover:underline">
                       {title}
                   </Link>
               </h3>
-              <div className="text-lg mb-4">
+              <div className="hidden lg:flex lg:text-sm mb-2">
                   <DateFormatter dateString={postdate.toISOString()} />
               </div>
-              <PostBody content={content}></PostBody>
-              <Source name={source} category={category} />
+              <PostBody content={content} on_mobile={false}></PostBody>
+              <PostBody content={content} on_mobile={true}></PostBody>
+              <Source name={source} category={category} on_mobile={false} />
           </div>
       </div>
   );

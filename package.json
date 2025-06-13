@@ -1,10 +1,14 @@
 {
+  "name": "news24",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "set NODE_ENV=production && next build",
-    "start": "set NODE_ENV=production && next start"
+    "start": "set NODE_ENV=production && next start",
+    "deploy": "touch out/.nojekyll && cp CNAME out/CNAME && gh-pages -d out -b gh-pages --dotfiles"
   },
+  "homepage": "https://news24.reddol18.pe.kr",
   "dependencies": {
     "classnames": "^2.5.1",
     "daisyui": "^5.0.35",
@@ -26,6 +30,7 @@
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "autoprefixer": "^10.4.19",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2"
